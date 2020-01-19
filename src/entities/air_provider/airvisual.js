@@ -43,7 +43,7 @@ class Airvisual {
 	}
 
 	_transformData({data, status}) {
-		const {current: {pollution}, data: { city }} = data;
+		const {current: {pollution}, city } = data;
 		if (status !== 'success') {
 			return new Error('Request to AIRVISUAL FAILED');
 		} else {
