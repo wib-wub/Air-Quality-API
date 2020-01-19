@@ -32,7 +32,7 @@ class Airvisual {
 		} else if (qualityPoint >= 201 && qualityPoint <= 300) {
 			return 'ไม่ดีต่อสุขภาพอย่างมาก';
 		} else if (qualityPoint >= 151 && qualityPoint <= 200) {
-			return 'ไม่ดีต่ออสุขภาพ';
+			return 'ไม่ดีต่อสุขภาพ';
 		} else if (qualityPoint >= 101 && qualityPoint <= 150) {
 			return 'ไม่ดีต่อสุขภาพสำหรับกลุ่มที่อ่อนไหว';
 		} else if (qualityPoint >= 51 && qualityPoint <= 100) {
@@ -43,7 +43,7 @@ class Airvisual {
 	}
 
 	_transformData({data, status}) {
-		const {current: {pollution}} = data;
+		const {current: {pollution}, data: { city }} = data;
 		if (status !== 'success') {
 			return new Error('Request to AIRVISUAL FAILED');
 		} else {
@@ -51,6 +51,7 @@ class Airvisual {
 				message: this._airQualityGrade(pollution.aqius),
 				aqi: pollution.aqius,
 				timestamp: pollution.ts,
+				location: `${city}`
 			};
 		}
 	}
